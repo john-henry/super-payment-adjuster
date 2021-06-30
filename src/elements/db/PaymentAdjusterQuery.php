@@ -7,8 +7,8 @@
 
 namespace pdaleramirez\superpaymentadjuster\elements\db;
 
-//use craft\elements\db\ElementQuery;
-use craft\db\Query;
+use craft\elements\db\ElementQuery;
+
 
 
 class PaymentAdjusterQuery extends ElementQuery
