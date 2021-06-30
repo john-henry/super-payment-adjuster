@@ -8,7 +8,7 @@
 namespace pdaleramirez\superpaymentadjuster\elements\db;
 
 use craft\elements\db\ElementQuery;
-use pdaleramirez\superpaymentadjuster\db\Table;
+
 
 
 class PaymentAdjusterQuery extends ElementQuery
@@ -19,19 +19,19 @@ class PaymentAdjusterQuery extends ElementQuery
      */
     protected function beforePrepare(): bool
     {
-        $this->joinElementTable(Table::PAYMENT_ADJUSTER);
+        $this->joinElementTable('superpaymentadjuster_payment_adjuster');
 
         $this->query->select([
-            Table::PAYMENT_ADJUSTER . '.id',
-            Table::PAYMENT_ADJUSTER . '.name',
-            Table::PAYMENT_ADJUSTER . '.handle',
-            Table::PAYMENT_ADJUSTER . '.description',
-            Table::PAYMENT_ADJUSTER . '.gatewayHandle',
-            Table::PAYMENT_ADJUSTER . '.method',
-            Table::PAYMENT_ADJUSTER . '.type',
-            Table::PAYMENT_ADJUSTER . '.amountType',
-            Table::PAYMENT_ADJUSTER . '.baseAmount',
-            Table::PAYMENT_ADJUSTER . '.percentAmount'
+            'superpaymentadjuster_payment_adjuster.id',
+            'superpaymentadjuster_payment_adjuster.name',
+            'superpaymentadjuster_payment_adjuster.handle',
+            'superpaymentadjuster_payment_adjuster.description',
+            'superpaymentadjuster_payment_adjuster.gatewayHandle',
+            'superpaymentadjuster_payment_adjuster.method',
+            'superpaymentadjuster_payment_adjuster.type',
+            'superpaymentadjuster_payment_adjuster.amountType',
+            'superpaymentadjuster_payment_adjuster.baseAmount',
+            'superpaymentadjuster_payment_adjuster.percentAmount'
         ]);
 
         return parent::beforePrepare();
