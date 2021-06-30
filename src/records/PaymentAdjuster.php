@@ -10,7 +10,6 @@
 
 namespace pdaleramirez\superpaymentadjuster\records;
 
-use pdaleramirez\superpaymentadjuster\db\Table;
 use craft\db\ActiveRecord;
 
 /**
@@ -24,11 +23,5 @@ class PaymentAdjuster extends ActiveRecord
     const METHOD_DEDUCT = 'paymentAdjusterMethodDeduct';
     const AMOUNT_FLAT = 'paymentAdjusterFlatAmount';
     const AMOUNT_PERCENT = 'paymentAdjusterPercentAmount';
-    /**
-     * @inheritdoc
-     */
-    public static function tableName()
-    {
-        return Table::PAYMENT_ADJUSTER;
-    }
+
 }

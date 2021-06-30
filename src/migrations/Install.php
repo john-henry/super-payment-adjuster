@@ -11,8 +11,8 @@
 namespace pdaleramirez\superpaymentadjuster\migrations;
 
 use Craft;
+use craft\config\DbConfig;
 use craft\db\Migration;
-use pdaleramirez\superpaymentadjuster\db\Table;
 use pdaleramirez\superpaymentadjuster\records\PaymentAdjuster;
 
 /**
@@ -22,12 +22,24 @@ use pdaleramirez\superpaymentadjuster\records\PaymentAdjuster;
  */
 class Install extends Migration
 {
+    // Public Properties
+    // =========================================================================
+
+    /**
+     * @var string The database driver to use
+     */
+    public $driver;
+
+    // Public Methods
+    // =========================================================================
+
+
     /**
      * @inheritdoc
      */
     public function safeUp()
     {
-        $this->createTables();
+        $this->driver = Craft::$app->getConfig()->getDb()->driver;$this->createTables();
         $this->createIndexes();
 
         return true;
@@ -38,10 +50,14 @@ class Install extends Migration
      */
     public function safeDown()
     {
-        $this->dropTableIfExists(Table::PAYMENT_ADJUSTER);
+        $this->driver = Craft::$app->getConfig()->getDb()->driver;
+        $this->removeTables();
 
         return true;
     }
+
+    // Protected Methods
+    // =========================================================================
 
     /**
      * @return bool
@@ -50,11 +66,11 @@ class Install extends Migration
     {
         $tablesCreated = false;
 
-        $tableSchema = Craft::$app->db->schema->getTableSchema(Table::PAYMENT_ADJUSTER);
+        $tableSchema = Craft::$app->db->schema->getTableSchema('{{%superpaymentadjuster_payment_adjuster}}');
         if ($tableSchema === null) {
             $tablesCreated = true;
             $this->createTable(
-                Table::PAYMENT_ADJUSTER,
+                '{{%superpaymentadjuster_payment_adjuster}}',
                 [
                     'id' => $this->primaryKey(),
                     'name' => $this->string(),
@@ -81,6 +97,15 @@ class Install extends Migration
      */
     protected function createIndexes()
     {
-        $this->createIndex(null, Table::PAYMENT_ADJUSTER, 'handle', true);
+        $this->createIndex(null, '{{%superpaymentadjuster_payment_adjuster}}', 'handle', true);
+    }
+
+    /**
+     * @return void
+     */
+    protected function removeTables()
+    {
+        // superpaymentadjuster_payment_adjustertable
+        $this->dropTableIfExists('{{%superpaymentadjuster_payment_adjuster}}');
     }
 }
