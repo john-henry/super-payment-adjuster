@@ -66,11 +66,11 @@ class Install extends Migration
     {
         $tablesCreated = false;
 
-        $tableSchema = Craft::$app->db->schema->getTableSchema('{{%superpaymentadjuster_payment_adjuster}}');
+        $tableSchema = Craft::$app->db->schema->getTableSchema('{{%payment_adjuster}}');
         if ($tableSchema === null) {
             $tablesCreated = true;
             $this->createTable(
-                '{{%superpaymentadjuster_payment_adjuster}}',
+                '{{%payment_adjuster}}',
                 [
                     'id' => $this->primaryKey(),
                     'name' => $this->string(),
@@ -97,7 +97,7 @@ class Install extends Migration
      */
     protected function createIndexes()
     {
-        $this->createIndex(null, '{{%superpaymentadjuster_payment_adjuster}}', 'handle', true);
+        $this->createIndex(null, '{{%payment_adjuster}}', 'handle', true);
     }
 
     /**
@@ -105,7 +105,7 @@ class Install extends Migration
      */
     protected function removeTables()
     {
-        // superpaymentadjuster_payment_adjustertable
-        $this->dropTableIfExists('{{%superpaymentadjuster_payment_adjuster}}');
+        // payment_adjuster table
+        $this->dropTableIfExists('{{%payment_adjuster}}');
     }
 }
