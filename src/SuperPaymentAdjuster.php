@@ -62,13 +62,13 @@ class SuperPaymentAdjuster extends Plugin
 
         self::$app = $this;
 
-        Event::on(
-            OrderAdjustments::class,
-            OrderAdjustments::EVENT_REGISTER_ORDER_ADJUSTERS,
-            function (RegisterComponentTypesEvent $event) {
-                $event->types[] = PaymentMethodAdjuster::class;
-            }
-        );
+        // Event::on(
+        //     OrderAdjustments::class,
+        //     OrderAdjustments::EVENT_REGISTER_ORDER_ADJUSTERS,
+        //     function (RegisterComponentTypesEvent $event) {
+        //         $event->types[] = PaymentMethodAdjuster::class;
+        //     }
+        // );
     }
 
     /**
