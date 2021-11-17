@@ -35,19 +35,22 @@ class PaymentAdjuster extends Component
             Tax::ADJUSTMENT_TYPE
         ];
     }
-    
+
     public function getAdjustmentTotal(Order $order, PaymentAdjusterElement $paymentAdjuster)
     {
         $amount = $paymentAdjuster->baseAmount;
         if ($paymentAdjuster->amountType === PaymentAdjusterRecord::AMOUNT_PERCENT) {
             $amount = $order->getTotal() * ($paymentAdjuster->percentAmount / 100);
+				$amount= round($amount, 2);
+
         }
 
         $total = $amount;
         if ($paymentAdjuster->method === PaymentAdjusterRecord::METHOD_DEDUCT) {
             $total = $amount * -1;
+				$total = round($total, 2);
         }
-        
+
         return $total;
     }
 }
